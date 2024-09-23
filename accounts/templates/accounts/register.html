@@ -1,33 +1,47 @@
-{% extends 'accounts/base.html' %}
+{% extends 'base/base.html' %}
+{% load form_tags %}
 {% load static %}
+
 
 {% block title %}Register{% endblock title %}
 
-{% block form %}
-    <form action="{% url 'accounts:register' %}" method="post">
+{% block content %}
+    <form action="{% url 'accounts:register' %}" method="post" class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800 my-5">
         {% csrf_token %}
 
-        <h1>Register</h1>
+        <h1 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Register</h1>
 
         {% if message %}
-            <p class="error">{{ message }}</p>
+            <p class="mb-4 text-red-500">{{ message }}</p>
         {% endif %}
-        
+
         {% for field in form %}
-            <div class="form-group">
-                <p class="field-label">
+            <div class="form-group mb-4">
+                <!-- Field Label -->
+                <label for="{{ field.id_for_label }}" class="block text-gray-700 dark:text-gray-300 mb-2">
                     {{ field.label }}
-                </p>
-                {{ field }}
+                </label>
+
+                <!-- Field Input -->
+                {{ field|add_class:"w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300" }}
+
+                <!-- Field Errors -->
+                {% if field.errors %}
+                    <p class="text-red-500 mt-2 text-sm">
+                        {{ field.errors.as_text|escape }}
+                    </p>
+                {% endif %}
             </div>
         {% endfor %}
 
-        <input type="submit" value="Sign Up">
+        <!-- Submit Button -->
+        <input type="submit" value="Sign Up"
+            class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition dark:bg-blue-500 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
 
-        <p class="dont-have">
-            Already have an account? <a href="{% url 'accounts:login' %}">Login here.</a>
+        <!-- Login Link -->
+        <p class="mt-4 text-gray-600 dark:text-gray-400">
+            Already have an account? <a href="{% url 'accounts:login' %}" class="text-blue-600 dark:text-blue-400 hover:underline">Login here.</a>
         </p>
-
     </form>
 
    

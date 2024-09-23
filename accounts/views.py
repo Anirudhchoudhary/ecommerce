@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, LoginForm
 from .models import User
 
 # Create your views here.
@@ -13,19 +13,24 @@ def login_view(request):
         return redirect('dashboard:index')
 
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        form = LoginForm(request.POST)
+        if form.is_valid():    
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            return redirect('dashboard:index')
+            if user is not None:
+                login(request, user)
+                return redirect('dashboard:index')
+            else:
+                return render(request, 'accounts/login.html', {
+                    'message': 'Invalid username and/or password'
+                })
         else:
-            return render(request, 'accounts/login.html', {
-                'message': 'Invalid username and/or password'
-            })
+            pass
     elif request.method == 'GET':
-        return render(request, 'accounts/login.html')
+        form = LoginForm()
+        return render(request, 'accounts/login.html', {"form": form})
 
 def logout_view(request):
     logout(request)

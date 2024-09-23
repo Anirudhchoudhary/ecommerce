@@ -1,0 +1,66 @@
+<!-- footer.html -->
+<footer class="bg-amber-50 text-amber-900 py-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+        <!-- About Us -->
+        <div>
+            <h3 class="text-lg font-semibold mb-3">About Us</h3>
+            <p class="text-sm">
+                We provide the highest quality dry fruits with fast home delivery across India. Freshness guaranteed!
+            </p>
+        </div>
+
+        <!-- Our Products -->
+        <div>
+            <h3 class="text-lg font-semibold mb-3">Our Products</h3>
+            <ul class="text-sm space-y-2">
+                <li><a href="" class="hover:underline">Cashews</a></li>
+                <li><a href="" class="hover:underline">Walnuts</a></li>
+                <li><a href="" class="hover:underline">Peanuts</a></li>
+                <li><a href="" class="hover:underline">Mixed Dry Fruits</a></li>
+            </ul>
+        </div>
+
+        <!-- Customer Support -->
+        <div>
+            <h3 class="text-lg font-semibold mb-3">Customer Support</h3>
+            <ul class="text-sm space-y-2">
+                <li><a href="" class="hover:underline">FAQs</a></li>
+                <li><a href="" class="hover:underline">Return Policy</a></li>
+                <li><a href="" class="hover:underline">Delivery Information</a></li>
+            </ul>
+        </div>
+
+        <!-- Connect with Us -->
+        <div>
+            <h3 class="text-lg font-semibold mb-3">Connect with Us</h3>
+            <div class="flex space-x-4 mb-4">
+                <a href="https://instagram.com/wealth_dryfruits" class="text-black hover:text-black">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd"/>
+                      </svg>                      
+                </a>
+                <a href="https://instagram.com/wealth_dryfruits" class="hover:text-amber-600">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path fill="currentColor" fill-rule="evenodd" d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clip-rule="evenodd"/>
+                      </svg>                      
+                </a>
+            </div>
+
+            <!-- Newsletter Signup -->
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="flex space-x-2">
+                    <input type="email" name="email" placeholder="Enter your email" class="px-4 py-2 bg-white border border-amber-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm w-full">
+                    <button type="submit" class="bg-amber-600 text-white px-4 py-2 rounded-md text-sm hover:bg-amber-700">
+                        Subscribe
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="border-t mt-6 pt-4 text-center text-sm text-amber-700">
+        <p>&copy; {{ current_year }} Dry Fruits Co. All rights reserved.</p>
+    </div>
+</footer>

@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root{
+    --primary-font: 'Inter', sans-serif;
+    --heading-color: #092e20;
+}
+
+.hover-grow:hover {
+    transform: scale(1.05);
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    100% {
+        opacity: 1;
+    }
+}
+
+#header_banner {
+    background-image: "url('{% static '/images/banner.webp' %}')";
+}

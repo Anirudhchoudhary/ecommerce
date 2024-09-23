@@ -1,37 +1,48 @@
-{% extends 'accounts/base.html' %}
+{% extends 'base/base.html' %}
+{% load form_tags %}
 {% load static %}
 
-{% block title %}Login{% endblock title %}
 
-{% block form %}
-    <form action="{% url 'accounts:login' %}" method="post">
+{% block title %}Register{% endblock title %}
+
+{% block content %}
+    <form action="{% url 'accounts:login' %}" method="post" class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800 my-5">
         {% csrf_token %}
 
-        <h1>Log In</h1>
+        <h1 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Log In</h1>
 
         {% if message %}
-            <p class="error">{{ message }}</p>
+            <p class="mb-4 text-red-500">{{ message }}</p>
         {% endif %}
-        <div class="form-group">
-            <p class="field-label">
-                Username
-            </p>
-            <input type="text" name="username" id="username">
-        </div>
 
-        <div class="form-group">
-            <p class="field-label">
-                Password
-            </p>
-            <input type="password" name="password" id="password">
-        </div>
+        {% for field in form %}
+            <div class="form-group mb-4">
+                <!-- Field Label -->
+                <label for="{{ field.id_for_label }}" class="block text-gray-700 dark:text-gray-300 mb-2">
+                    {{ field.label }}
+                </label>
 
-        <input type="submit" value="Log In">
+                <!-- Field Input -->
+                {{ field|add_class:"w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300" }}
 
-        <p class="dont-have">
-            Don't have an account? <a href="{% url 'accounts:register' %}">Register here.</a>
+                <!-- Field Errors -->
+                {% if field.errors %}
+                    <p class="text-red-500 mt-2 text-sm">
+                        {{ field.errors.as_text|escape }}
+                    </p>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <!-- Submit Button -->
+        <input type="submit" value="Sign Up"
+            class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition dark:bg-blue-500 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+        <!-- Login Link -->
+        <p class="mt-4 text-gray-600 dark:text-gray-400">
+            Don't have account?  <a href="{% url 'accounts:register' %}" class="text-blue-600 dark:text-blue-400 hover:underline">Create One.</a>
         </p>
     </form>
 
-    
+   
 {% endblock %}

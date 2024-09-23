@@ -1,0 +1,70 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Banner Section with Animation -->
+    <header class="relative bg-cover bg-center bg-no-repeat h-screen flex flex-col justify-center items-center text-white w-full"
+        style="background-image: url('https://dnl7nif3s8j3b.cloudfront.net/static/images/banner.webp'); background-position: center;background-repeat: no-repeat;">
+        <div class="bg-slate-600 bg-opacity-50 p-8 rounded-lg animate__animated animate__fadeInDown text-center">
+            <h1 class="text-5xl font-extrabold drop-shadow-lg">Welcome to Wealth Dry Fruits</h1>
+            <p class="mt-4 text-xl mx-auto">Premium quality dry fruits for a healthier lifestyle.</p>
+            <a href="#products" class="mt-6 inline-block bg-yellow-500 text-black font-semibold py-3 px-8 rounded-full hover:bg-yellow-600 transition duration-300 transform hover:scale-105 animate__animated animate__pulse">Shop Now</a>
+        </div>
+        <!-- Scroll Down Arrow -->
+        <a href="#products" class="absolute bottom-10 text-black text-3xl animate__animated animate__bounce">
+            &#x2193;
+        </a>
+    </header>
+
+    <!-- Product Section with Animation -->
+    <section id="products" class="py-16 fade-in">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 animate__animated animate__fadeInUp">Our Best Sellers</h2>
+
+            <div class="flex justify-evenly gap-4 items-center flex-wrap">
+                <!-- Loop through products -->
+                {% for product in products %}
+                <div class="bg-white shadow-lg rounded-lg p-6 mx-4 transform hover-grow transition duration-300 animate__animated animate__fadeInUp">
+                    <img src="{{ product.image.image.thumbnails.small.url }}" alt="{{ product.name }}" class="w-full h-18 object-cover rounded-lg">
+                    <div class="p-4">
+                        <h3 class="text-2xl font-semibold text-gray-700">{{ product.name }}</h3>
+                        <p class="text-gray-600 mt-2">{{ product.description | truncatewords:4}}</p>
+                        <div class="mt-6 flex justify-between items-center flex-col">
+                            <p class="text-lg font-bold text-orange-700">₹ {{ product.price.min_price }}</p>
+                            <button class="bg-orange-300 text-white py-2 px-4 rounded-full hover:bg-green-600 transition duration-300" 
+                                onclick="addToCart({{ product.id }})">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Icon (Fixed to Bottom) with Animation -->
+    <div class="fixed bottom-6 right-6 animate__animated animate__fadeInRight">
+        <a href="" class="relative">
+            <div class="bg-green-700 text-white p-4 rounded-full shadow-lg hover:bg-green-800 transition duration-300 transform hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2m3.6 0h10l1.68 7.02M16 13h-4m-4 0H7l-4 9h18l-1.72-7.02M5 18h14M9 22a2 2 0 100-4 2 2 0 000 4zm6-2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+            </div>
+            <!-- Cart Item Count -->
+            <span class="absolute top-0 right-0 inline-block w-5 h-5 bg-red-600 text-white text-xs text-center rounded-full">0</span>
+        </a>
+    </div>
+    <!-- Whatsapp Icon (Fixed to Bottom) with Animation -->
+    <div class="fixed bottom-24 right-6 animate__animated animate__fadeInRight">
+        <a href="{{request.WHATSAPPURL}}"
+            " class="relative">
+            <div class="bg-green-700 text-white p-4 rounded-full shadow-lg hover:bg-green-800 transition duration-300 transform hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 48 48">
+                    <path fill="#25D366" d="M23.999 0C10.746 0 0 10.746 0 24c0 4.171 1.073 8.14 3.106 11.697L0 48l12.612-3.102A23.926 23.926 0 0 0 24 48c13.255 0 24-10.746 24-24S37.255 0 24 0Zm-.001 44.063a20.983 20.983 0 0 1-10.701-2.954l-.768-.457-7.475 1.838 1.942-7.285-.5-.787A20.946 20.946 0 0 1 3.001 24.001c0-11.598 9.401-21 21-21 11.597 0 21 9.402 21 21 0 11.599-9.402 21.001-21.003 21.001Z"/>
+                    <path fill="#25D366" d="M36.33 31.601c-.561-.28-3.296-1.63-3.805-1.822-.511-.188-.882-.28-1.255.281-.373.562-1.439 1.82-1.764 2.191-.328.373-.648.415-1.206.14-.561-.28-2.364-.867-4.51-2.759-1.667-1.485-2.787-3.319-3.116-3.879-.329-.562-.034-.867.248-1.148.254-.253.56-.66.841-.99.282-.329.374-.561.561-.934.19-.374.095-.701-.048-.981-.14-.281-1.255-3.03-1.725-4.163-.451-1.086-.907-.939-1.255-.955-.327-.014-.702-.017-1.073-.017-.374 0-.98.14-1.491.701-.514.561-1.94 1.899-1.94 4.635 0 2.735 1.986 5.384 2.264 5.762.28.373 3.906 6.017 9.456 8.44.301.13.535.205.717.263.302.096.575.083.792.048.242-.035 2.365-.966 3.255-2.705.096-.186.095-.373.048-.562-.051-.184-.188-.28-.395-.373Z"/>
+                  </svg>
+            </div>
+            <!-- Cart Item Count -->
+            <span class="absolute top-0 right-0 inline-block w-5 h-5 bg-red-600 text-white text-xs text-center rounded-full">0</span>
+        </a>
+    </div>
+{% endblock content %}
